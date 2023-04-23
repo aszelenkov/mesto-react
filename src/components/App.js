@@ -11,11 +11,12 @@ function App() {
     isEditAvatarPopupOpen: false,
     isEditProfilePopupOpen: false,
     isAddPlacePopupOpen: false,
+    isPhotoViewPopupOpen: false,
     selectedCard: null,
   });
 
   const handleCardClick = (props) => {
-    setPopups({ ...popups, selectedCard: props });
+    setPopups({ ...popups, isPhotoViewPopupOpen: true, selectedCard: props });
   };
 
   const handlePopupStateChange = (popup, state) => {
@@ -27,6 +28,7 @@ function App() {
       isEditAvatarPopupOpen: false,
       isEditProfilePopupOpen: false,
       isAddPlacePopupOpen: false,
+      isPhotoViewPopupOpen: false,
       selectedCard: null,
     });
   };
@@ -48,8 +50,9 @@ function App() {
       <PopupWithForm
         name='edit-avatar'
         title='Обновить аватар'
-        isOpen={popups.isEditAvatarPopupOpen && 'popup_opened'}
+        isOpen={popups.isEditAvatarPopupOpen}
         onClose={closeAllPopups}
+        submitButtonText='Сохранить'
            
       >
         <input
@@ -66,8 +69,9 @@ function App() {
       <PopupWithForm
         name='edit'
         title='Редактировать профиль'
-        isOpen={popups.isEditProfilePopupOpen && 'popup_opened'}
+        isOpen={popups.isEditProfilePopupOpen}
         onClose={closeAllPopups}
+        submitButtonText='Сохранить'
         
       >
         <input
@@ -100,8 +104,9 @@ function App() {
       <PopupWithForm
         title='Новое место'
         name='item'
-        isOpen={popups.isAddPlacePopupOpen && 'popup_opened'}
+        isOpen={popups.isAddPlacePopupOpen}
         onClose={closeAllPopups}
+        submitButtonText='Создать'
         
       >
         <input
@@ -132,15 +137,17 @@ function App() {
       <PopupWithForm
         name='delete-card'
         title='Вы уверены?'
+        submitButtonText='Да'
       />
       
-      {popups.selectedCard && (
-        <ImagePopup
-          name='photo-view'
-          card={popups.selectedCard}
-          onClose={closeAllPopups}
-        />
-      )};
+      
+      <ImagePopup
+        name='photo-view'
+        isOpen={popups.isPhotoViewPopupOpen}
+        card={popups.selectedCard}
+        onClose={closeAllPopups}
+      />
+      
 
     </div>
   );

@@ -1,5 +1,5 @@
 function Card({ card, onCardClick }) {
-  function handleClick() {
+  function handleCardClick() {
     onCardClick(card);
   }
 
@@ -9,7 +9,7 @@ function Card({ card, onCardClick }) {
         className="elements__photo"
         src={card.link}
         alt={card.name}
-        onClick={handleClick}
+        onClick={handleCardClick}
       />
       <h2 className="elements__title">{card.name}</h2>
       <div className="elements__like-block">

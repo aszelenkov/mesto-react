@@ -25,7 +25,10 @@ function Main(props) {
     <main className='content'>
 
       <section className='profile'>
-        <div className='profile__avatar-block' onClick={props.onEditAvatar}>
+        <div 
+          className='profile__avatar-block' 
+          onClick={props.onEditAvatar}
+        >
           <img 
             className='profile__avatar' 
             src={userAvatar} 
@@ -54,8 +57,12 @@ function Main(props) {
           </button>
       </section>
 
-      <section className='elements' aria-label='Секция с карточками'>
-        <ul className='elements__cards'>
+      <section 
+        className='elements' 
+        aria-label='Секция с карточками'
+      >
+        <ul className='elements__cards'
+        >
           {cards.map((card) => (
             <Card
               key={card._id}

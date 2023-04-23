@@ -1,33 +1,24 @@
 import React from 'react';
-function PopupWithForm({ name, isOpen, onClose, id, title, children }) {
+function PopupWithForm({ name, isOpen, onClose, id, title, children, submitButtonText }) {
 
-  const getSubmitButtonText = (name) => {
-    switch (name) {
-      case 'edit-avatar':
-      case 'edit':
-        return 'Сохранить';
-      case 'item':
-        return 'Создать';
-      case 'delete-card':
-        return 'Да';
-      default:
-        return '';
-    }
-  }
   const stopPropagation = (event) => event.stopPropagation();
 
   return (
     <div
-      className={`popup popup_type_${name} ${isOpen}`}
+      className={`popup popup_type_${name} ${isOpen && 'popup_opened'}`}
       onClick={onClose}
     >
-      <div className='popup__container' onClick={stopPropagation}>
+      <div 
+        className='popup__container' 
+        onClick={stopPropagation}
+      >
         <button
           className='popup__button-close popup__close'
           type='button'
           aria-label='Закрыть pop-up'
           onClick={onClose}
-        />
+        >
+        </button>
         <form
           className={`popup__form popup__form_${name}`}
           name={name}
@@ -40,7 +31,7 @@ function PopupWithForm({ name, isOpen, onClose, id, title, children }) {
             className='popup__button-save popup__button-submit'
             type='submit'
           >
-            {getSubmitButtonText(name)}
+            {submitButtonText}
           </button>
         </form>
       </div>
