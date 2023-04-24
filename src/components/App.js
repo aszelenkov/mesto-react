@@ -107,7 +107,6 @@ function App() {
         isOpen={popups.isAddPlacePopupOpen}
         onClose={closeAllPopups}
         submitButtonText='Создать'
-        
       >
         <input
           className='popup__input popup__input_item_title'
@@ -139,7 +138,6 @@ function App() {
         title='Вы уверены?'
         submitButtonText='Да'
       />
-      
       
       <ImagePopup
         name='photo-view'
