@@ -155,7 +155,6 @@ function App() {
       />
 
       <ImagePopup
-        name='photo-view'
         isOpen={popups.isPhotoViewPopupOpen}
         card={popups.selectedCard}
         onClose={closeAllPopups}
