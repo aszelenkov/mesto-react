@@ -1,8 +1,6 @@
 import React from 'react';
 
 function ImagePopup({ name, isOpen, onClose, card }) {
-
-  const stopPropagation = (event) => event.stopPropagation();
   
   return (
     <div 
@@ -10,7 +8,6 @@ function ImagePopup({ name, isOpen, onClose, card }) {
       onClick={onClose}
     >
       <div className="popup__container-view" 
-      onClick={stopPropagation}
       >
         <button 
           className="popup__button-close popup__close" 

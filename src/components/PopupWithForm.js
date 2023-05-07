@@ -1,37 +1,34 @@
 import React from 'react';
-function PopupWithForm({ name, isOpen, onClose, id, title, children, submitButtonText }) {
-
-  const stopPropagation = (event) => event.stopPropagation();
+function PopupWithForm(props) {
 
   return (
     <div
-      className={`popup popup_type_${name} ${isOpen && 'popup_opened'}`}
-      onClick={onClose}
+      className={`popup popup_type_${props.name} ${props.isOpen && 'popup_opened'}`}
     >
       <div 
         className='popup__container' 
-        onClick={stopPropagation}
       >
         <button
           className='popup__button-close popup__close'
           type='button'
           aria-label='Закрыть pop-up'
-          onClick={onClose}
+          onClick={props.onClose}
         >
         </button>
         <form
-          className={`popup__form popup__form_${name}`}
-          name={name}
-          id={id}
+          className={`popup__form popup__form_${props.name}`}
+          name={props.name}
+          id={props.id}
+          onSubmit={props.onSubmit}
           noValidate
         >
-          <h2 className="popup__title">{title}</h2>
-          {children}
+          <h2 className="popup__title">{props.title}</h2>
+          {props.children}
           <button
             className='popup__button-save popup__button-submit'
             type='submit'
           >
-            {submitButtonText}
+            {props.submitButtonText}
           </button>
         </form>
       </div>

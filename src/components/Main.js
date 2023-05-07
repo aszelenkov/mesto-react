@@ -1,25 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import api from '../utils/api';
+import React, { useContext } from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Card from './Card';
 
 function Main(props) {
-  const [userName, setUserName] = useState('');
-  const [userDescription, setUserDescription] = useState('');
-  const [userAvatar, setUserAvatar] = useState('');
-  const [cards, setCards] = useState([]);
-
-  const handleError = (err) => console.log(`Ошибка: ${err}`);
-
-  useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getItems()])
-      .then(([userData, cardsData]) => {
-        setUserName(userData.name);
-        setUserDescription(userData.about);
-        setUserAvatar(userData.avatar);
-        setCards(cardsData);
-      })
-      .catch(handleError);
-  }, []);
+  
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <main className='content'>
@@ -31,14 +16,14 @@ function Main(props) {
         >
           <img 
             className='profile__avatar' 
-            src={userAvatar} 
+            src={currentUser.avatar} 
             alt='Аватар профиля'
           />
         </div>
 
         <div className='profile__info'>
-          <h1 className='profile__name'>{userName}</h1>
-          <p className='profile__about'>{userDescription}</p>
+          <h1 className='profile__name'>{currentUser.name}</h1>
+          <p className='profile__about'>{currentUser.about}</p>
           <button 
             className='profile__button-edit' 
             type='button' 
@@ -63,11 +48,14 @@ function Main(props) {
       >
         <ul className='elements__cards'
         >
-          {cards.map((card) => (
+          {props.cards.map((card) => (
             <Card
               key={card._id}
               card={card}
               onCardClick={props.onCardClick}
+              onCardLike={props.onCardLike}
+              onCardDelete={props.onCardDelete}
+              onClose={props.onClose}
             />
           ))}
         </ul>

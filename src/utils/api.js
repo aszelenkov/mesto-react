@@ -13,7 +13,8 @@ class Api {
   };
 
   getItems() {
-    return fetch(`${this._baseUrl}/cards`, { headers: this._headers })
+    return fetch(`${this._baseUrl}/cards`, { 
+      headers: this._headers })
       .then((res) => this._checkResponse(res));
   };
 
@@ -21,11 +22,14 @@ class Api {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify({ name, link }),
+      body: JSON.stringify({ 
+        name: name, 
+        link: link 
+      }),
     }).then((res) => this._checkResponse(res));
   };
 
-  deleteItem(cardId) {
+  deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
@@ -46,16 +50,23 @@ class Api {
     }).then((res) => this._checkResponse(res));
   };
 
+  changeLikeCardStatus(cardId, isLiked) {
+    return isLiked ? this.deleteLike(cardId) : this.addLike(cardId);
+  };
+
   editAvatar(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({avatar}),
+      body: JSON.stringify({
+        avatar
+      }),
     }).then((res) => this._checkResponse(res));
   };
 
   getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, { headers: this._headers })
+    return fetch(`${this._baseUrl}/users/me`, { 
+      headers: this._headers })
       .then((res) => this._checkResponse(res));
   };
 
