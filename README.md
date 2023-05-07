@@ -1,6 +1,6 @@
 # Mesto Russia на react
 
-* [Ссылка на проект](https://aszelenkov.github.io/mesto-react/public/)
+* [Ссылка на проект](https://aszelenkov.github.io/mesto-react/)
 
 ## Краткое описание:
 Проект Mesto рассказывает о человеке и его хобби, работе, отдыхе и увлечениях в виде карточек с фото или картинками.
