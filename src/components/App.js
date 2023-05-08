@@ -18,10 +18,10 @@ function App() {
     isAddPlacePopupOpen: false,
     isPhotoViewPopupOpen: false,
     isDeleteCardPopupOpen: false,
-    selectedCard: null,
-    deletedCard: null
   });
 
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [deletedCard, setDeletedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
 
@@ -36,9 +36,11 @@ function App() {
       isAddPlacePopupOpen: false,
       isPhotoViewPopupOpen: false,
       isDeleteCardPopupOpen: false,
-      selectedCard: null,
-      deletedCard: null
+      // selectedCard: null,
+      // deletedCard: null
     });
+    setSelectedCard(null);
+    setDeletedCard(null);
   };
 
   const handleError = (err) => console.log(`Ошибка: ${err}`);
@@ -53,12 +55,14 @@ function App() {
   }, []);
 
   const handleCardClick = (card) => {
-    setPopups({ ...popups, isPhotoViewPopupOpen: true, selectedCard: card });
+    setSelectedCard(card);
+    setPopups({ ...popups, isPhotoViewPopupOpen: true });
   };
 
   const handleDeleteCardClick = (card) => {
-    setPopups({ ...popups, isDeleteCardPopupOpen: true, deletedCard: card });
-  }
+    setDeletedCard(card);
+    setPopups({ ...popups, isDeleteCardPopupOpen: true });
+  };
 
   const handleCardLike = (card) => {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -150,13 +154,13 @@ function App() {
       <DeleteCardPopup 
         onDeleteCard={handleCardDelete} 
         isOpen={popups.isDeleteCardPopupOpen} 
-        deletedCard={popups.deletedCard}
+        deletedCard={deletedCard}
         onClose={closeAllPopups} 
       />
 
       <ImagePopup
         isOpen={popups.isPhotoViewPopupOpen}
-        card={popups.selectedCard}
+        card={selectedCard}
         onClose={closeAllPopups}
       />
       
