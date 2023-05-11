@@ -1,6 +1,8 @@
 import React from 'react';
+import { usePopupClose } from '../hooks/usePopupClose';
 
 function ImagePopup({ name, isOpen, onClose, card }) {
+  usePopupClose(card, onClose);
   
   return (
     <div 

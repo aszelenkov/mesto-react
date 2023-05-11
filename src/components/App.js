@@ -36,8 +36,6 @@ function App() {
       isAddPlacePopupOpen: false,
       isPhotoViewPopupOpen: false,
       isDeleteCardPopupOpen: false,
-      // selectedCard: null,
-      // deletedCard: null
     });
     setSelectedCard(null);
     setDeletedCard(null);
@@ -108,7 +106,7 @@ function App() {
     api
       .setItem({ name: name, link: link })
       .then((newCard) => {
-        setCards([newCard, ...cards]);
+        setCards((cards) => [newCard, ...cards]);
         closeAllPopups();
       })
       .catch(handleError)
@@ -120,6 +118,7 @@ function App() {
       
       <Header />
 
+      {currentUser && (
       <Main
         onEditAvatar={() => handlePopupStateChange("isEditAvatarPopupOpen", true)}
         onEditProfile={() => handlePopupStateChange("isEditProfilePopupOpen", true)}
@@ -130,9 +129,12 @@ function App() {
         cards={cards}
         onClose={closeAllPopups}
       />
+      )}
 
       <Footer />
 
+      {currentUser && (
+      <>
       <EditAvatarPopup 
         onUpdateAvatar={handleUpdateAvatar} 
         isOpen={popups.isEditAvatarPopupOpen} 
@@ -157,6 +159,8 @@ function App() {
         deletedCard={deletedCard}
         onClose={closeAllPopups} 
       />
+      </>
+      )}
 
       <ImagePopup
         isOpen={popups.isPhotoViewPopupOpen}

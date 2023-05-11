@@ -29,29 +29,29 @@ class Api {
     }).then((res) => this._checkResponse(res));
   };
 
-  deleteCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+  deleteCard(_id) {
+    return fetch(`${this._baseUrl}/cards/${_id}`, {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
   };
 
-  addLike(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+  addLike(_id) {
+    return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
       method: "PUT",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
   };
 
-  deleteLike(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+  deleteLike(_id) {
+    return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
   };
 
-  changeLikeCardStatus(cardId, isLiked) {
-    return isLiked ? this.deleteLike(cardId) : this.addLike(cardId);
+  changeLikeCardStatus(_id, isLiked) {
+    return isLiked ? this.deleteLike(_id) : this.addLike(_id);
   };
 
   editAvatar(avatar) {
